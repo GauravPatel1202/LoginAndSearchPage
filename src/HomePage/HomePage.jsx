@@ -5,41 +5,48 @@ import { connect } from 'react-redux';
 import { userActions } from '../_actions';
 
 class HomePage extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            search: '',
+        };
+
+        this.handleChange = this.handleChange.bind(this);
+
+        this.handleDeleteUser = this.handleDeleteUser.bind(this);
+    }
+
+    handleChange(e) {
+        const { name, value } = e.target;
+        this.setState({ [name]: value });
+    }
     componentDidMount() {
         this.props.dispatch(userActions.getAll());
     }
 
-    handleDeleteUser(id) {
-        return (e) => this.props.dispatch(userActions.delete(id));
+    handleDeleteUser() {
+        event.preventDefault()
+        const { search} = this.state;
+        return () => this.props.dispatch(userActions.delete(search));
     }
 
     render() {
         const { user, users } = this.props;
         return (
-            <div className="col-md-6 col-md-offset-3">
-                <h1>Hi {user.firstName}!</h1>
-                <p>You're logged in with React!!</p>
-                <h3>All registered users:</h3>
-                {users.loading && <em>Loading users...</em>}
-                {users.error && <span className="text-danger">ERROR: {users.error}</span>}
-                {users.items &&
-                    <ul>
-                        {users.items.map((user, index) =>
-                            <li key={user.id}>
-                                {user.firstName + ' ' + user.lastName}
-                                {
-                                    user.deleting ? <em> - Deleting...</em>
-                                    : user.deleteError ? <span className="text-danger"> - ERROR: {user.deleteError}</span>
-                                    : <span> - <a onClick={this.handleDeleteUser(user.id)}>Delete</a></span>
-                                }
-                            </li>
-                        )}
-                    </ul>
-                }
-                <p>
-                    <Link to="/login">Logout</Link>
+            <div className="col-md-12">
+                <h1 >Hi {user.firstName}</h1><p>
+                 <Link to="/login" className="logout">Logout</Link>
                 </p>
+                <p>
+                    <Link to="/change">Change Password</Link>
+                </p>
+                <form className="example">
+                 <input type="text" placeholder="Search.." name="search" onChange={this.handleChange}/>
+                <button type="submit" onClick={this.handleDeleteUser}><i className="fa fa-search"></i></button>
+                 </form>
+                
             </div>
+             
         );
     }
 }
@@ -48,7 +55,7 @@ function mapStateToProps(state) {
     const { users, authentication } = state;
     const { user } = authentication;
     return {
-        user,
+         user,
         users
     };
 }
