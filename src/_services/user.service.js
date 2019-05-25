@@ -1,6 +1,7 @@
 import config from 'config';
 import { authHeader } from '../_helpers';
 
+
 export const userService = {
     login,
     logout,
@@ -8,7 +9,8 @@ export const userService = {
     getAll,
     getById,
     update,
-    delete: _delete
+    delete: _delete,
+    search
 };
 
 function login(username, password) {
@@ -79,6 +81,14 @@ function _delete(id) {
     };
 
     return fetch(`${config.apiUrl}/users/${id}`, requestOptions).then(handleResponse);
+}
+function search(data) {
+    const requestOptions = {
+        method: 'GET',
+        headers: authHeader()
+    };
+
+    return fetch(`${config.apiUrl}/serach/${data}`, requestOptions).then(handleResponse);
 }
 
 function handleResponse(response) {
