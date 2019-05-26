@@ -11,7 +11,8 @@ class ChangePage extends React.Component {
         this.state = {
             oldusername: '',
             newpassword: '',
-            submitted: false
+            submitted: false,
+            listdatausre:[]
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -27,13 +28,25 @@ class ChangePage extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
-
-        this.setState({ submitted: true });
-        const { username, password } = this.state;
-        const { dispatch } = this.props;
-        if (username && password) {
-            dispatch(userActions.login(username, password));
-        }
+       
+        const { loggingIn ,user,users} = this.props;
+        let datamatch=users.items.filter(userlist => { 
+            return userlist.id==user.id;
+        
+        });
+        let datamatchalllist=users.items.filter(userlist => { 
+            return userlist.id!=user.id;
+        
+        });
+        if(this.state.oldusername==datamatch[0].password&&!!this.state.newpassword){
+            datamatch[0]['password']=this.state.newpassword
+            
+       }
+      let data= [...datamatchalllist,datamatch[0]]
+       console.log(datamatch)
+        localStorage.setItem('users', JSON.stringify(data))
+        history.push('/login');
+     
     }
     handleCancel(e) {
         e.preventDefault();
@@ -41,6 +54,8 @@ class ChangePage extends React.Component {
     }
     componentDidMount() {
         this.props.dispatch(userActions.getAll());
+        const { loggingIn ,user} = this.props;
+        console.log(loggingIn)
     }
 
 
