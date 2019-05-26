@@ -8,7 +8,9 @@ export const userActions = {
     logout,
     register,
     getAll,
-    delete: _delete
+    delete: _delete,
+    searchList
+
 };
 
 function login(username, password) {
@@ -89,6 +91,22 @@ function _delete(id) {
             );
     };
 
+    function request(id) { return { type: userConstants.DELETE_REQUEST, id } }
+    function success(id) { return { type: userConstants.DELETE_SUCCESS, id } }
+    function failure(id, error) { return { type: userConstants.DELETE_FAILURE, id, error } }
+}
+function searchList(id) {
+    debugger;
+    console.log(id)
+     return dispatch => {
+     dispatch(request(id));
+
+        userService.search(id).then(
+                user => dispatch(success(id)),
+                error => dispatch(failure(id, error.toString()))
+            );
+    };
+    debugger;
     function request(id) { return { type: userConstants.DELETE_REQUEST, id } }
     function success(id) { return { type: userConstants.DELETE_SUCCESS, id } }
     function failure(id, error) { return { type: userConstants.DELETE_FAILURE, id, error } }

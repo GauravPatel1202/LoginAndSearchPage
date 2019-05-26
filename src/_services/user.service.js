@@ -83,6 +83,7 @@ function _delete(id) {
     return fetch(`${config.apiUrl}/users/${id}`, requestOptions).then(handleResponse);
 }
 function search(data) {
+    debugger;
     const requestOptions = {
         method: 'GET',
         headers: authHeader()

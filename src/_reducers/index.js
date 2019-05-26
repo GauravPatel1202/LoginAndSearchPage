@@ -12,8 +12,8 @@ const rootReducer = combineReducers({
   registration,
   users,
   alert,
-changePassword,
-search
+  changePassword,
+  search
 
 
 });
