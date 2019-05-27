@@ -1,6 +1,7 @@
 import { userConstants } from '../_constants';
 
 export function changePassword(state = {}, action) {
+  console.log(action)
   switch (action.type) {
     case userConstants.CHANGE_REQUEST:
       return { registering: true };

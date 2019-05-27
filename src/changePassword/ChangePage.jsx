@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { history } from '../_helpers';
 
@@ -28,7 +27,6 @@ class ChangePage extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
-       
         const { loggingIn ,user,users} = this.props;
         let datamatch=users.items.filter(userlist => { 
             return userlist.id==user.id;
@@ -43,9 +41,11 @@ class ChangePage extends React.Component {
             
        }
       let data= [...datamatchalllist,datamatch[0]]
-       console.log(datamatch)
         localStorage.setItem('users', JSON.stringify(data))
-        history.push('/login');
+        setTimeout(()=>{
+            history.push('/login');
+        },1000)
+        
      
     }
     handleCancel(e) {

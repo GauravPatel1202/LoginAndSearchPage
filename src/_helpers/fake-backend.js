@@ -10,6 +10,7 @@ export function configureFakeBackend() {
 
                 // authenticate
                 if (url.endsWith('/users/authenticate') && opts.method === 'POST') {
+                    users = JSON.parse(localStorage.getItem('users')) || [];
                     // get parameters from post request
                     let params = JSON.parse(opts.body);
 
