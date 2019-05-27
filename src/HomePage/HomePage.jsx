@@ -48,6 +48,9 @@ class HomePage extends React.Component {
                     <td>{invoice.firstName}</td>
                     <td>{invoice.lastName}</td>
                     <td>{invoice.company}</td>
+                    <td>{invoice.Email}</td>
+                    <td>{invoice.Phone}</td>
+                    <td>{invoice.address}</td>
                 </tr>
             )
         });
@@ -72,6 +75,9 @@ class HomePage extends React.Component {
                          <th>firstName</th>
                          <th>lastName</th>
                          <th>Company</th>
+                         <th>Email</th>
+                         <th>Phone</th>
+                         <th>Address</th>
                      </tr>
                  </thead>
                  <tbody>

@@ -13,6 +13,9 @@ class RegisterPage extends React.Component {
                 company:'',
                 firstName: '',
                 lastName: '',
+                Email: '',
+                Phone: '',
+                address: '',
                 username: '',
                 password: ''
                 
@@ -57,7 +60,7 @@ class RegisterPage extends React.Component {
                         <label htmlFor="Company">Company Name</label>
                         <input type="text" className="form-control" name="company" value={user.company} onChange={this.handleChange} />
                         {submitted && !user.company &&
-                            <div className="help-block">First Name is required</div>
+                            <div className="help-block">Company Name is required</div>
                         }
                     </div>
                     <div className={'form-group' + (submitted && !user.firstName ? ' has-error' : '')}>
@@ -72,6 +75,29 @@ class RegisterPage extends React.Component {
                         <input type="text" className="form-control" name="lastName" value={user.lastName} onChange={this.handleChange} />
                         {submitted && !user.lastName &&
                             <div className="help-block">Last Name is required</div>
+                        }
+                    </div>
+                    <div className={'form-group' + (submitted && !user.Email ? ' has-error' : '')}>
+                        <label htmlFor="Email">Email</label>
+                        <input type="text" className="form-control" name="Email" value={user.Email} onChange={this.handleChange} />
+                        {submitted && !user.Email &&
+                            <div className="help-block">Email is required</div>
+                        }
+                    </div>
+                    <div className={'form-group' + (submitted && !user.Phone? ' has-error' : '')}>
+                        <label htmlFor="Phone">Phone</label>
+                        <input type="text" className="form-control" name="Phone" value={user.Phone} onChange={this.handleChange} />
+                        {submitted && !user.Phone &&
+                            <div className="help-block">Phone is required</div>
+                        }
+                    </div>
+                    
+                
+                    <div className={'form-group' + (submitted && !user.address ? ' has-error' : '')}>
+                        <label htmlFor="address">Address</label>
+                        <input type="text" className="form-control" name="address" value={user.address} onChange={this.handleChange} />
+                        {submitted && !user.address &&
+                            <div className="help-block">address is required</div>
                         }
                     </div>
                     <div className={'form-group' + (submitted && !user.username ? ' has-error' : '')}>
